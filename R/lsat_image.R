@@ -54,7 +54,8 @@ lsatGET <- function(url, dat, overwrite, ...) {
 lsat_image <- function(x, overwrite = FALSE, ...) {
   dat <- parse_landsat_str(x)
   url <- sprintf(
-    "http://landsat-pds.s3.amazonaws.com/L8/%s/%s/%s/%s",
+#    "http://landsat-pds.s3.amazonaws.com/L8/%s/%s/%s/%s",
+    "https://landsat-pds.s3.amazonaws.com/c1/L8/%s/%s/%s/%s",
     dat$wrs_path, dat$wrs_row, dat$str, basename(x)
   )
   lsatGET(url, dat, overwrite, ...)
