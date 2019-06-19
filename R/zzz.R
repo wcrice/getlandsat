@@ -21,6 +21,7 @@ parse_landsat_str <- function(x) {
     ext <- strextract(x, "\\.[A-Za-z]+")
     x <- gsub("\\.[A-Za-z]+", "", x)
   }
+    if (nchar(x) == 25){
   xsplit <- strsplit(x, "_")[[1]]
   file <- xsplit[2]
   z <- xsplit[1]
@@ -33,6 +34,19 @@ parse_landsat_str <- function(x) {
               day_julian = substr(z, 14, 16),
               archive_version = substr(z, 17, 18)
   )
+  }
+  if (nchar(x) == 44){
+      xsplit <- strsplit(x, "T1_")[[1]]
+  file <- xsplit[2]
+  z <- paste0(xsplit[1], "T1")
+      res <- list(landsat = substr(z, 1, 1),
+              sensor = substr(z, 2, 2),
+              satellite = substr(z, 4, 4),
+              wrs_path = substr(z, 12, 13),
+              wrs_row = substr(z, 15, 16),
+              year = substr(z, 18, 21),
+              archive_version = substr(z, 36, 37))
+  }
   c(res, str = z, file = file, ext = ext)
 }
 
